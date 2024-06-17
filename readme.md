@@ -9,7 +9,7 @@ services for managing the user's list, including adding, removing, and listing s
 Implement the APIs for the “My List” feature on the backend so that any client (web or mobile apps) can easily consume these APIs to complete the feature. Ensure the solution is scalable, performant,
 and includes integration tests.
 
-##Technical Requirements- Used
+## Technical Requirements- Used
 
 1. Backend - Typescript with Express Js
 2. Databse - MongoDB and MemCached
@@ -20,17 +20,55 @@ and includes integration tests.
 
 ## run this application
 
-As you can see there is two folders  contentApi & FavoriteApi
+### Requirements
+1. linux based platform needed. Use WSL Ubuntu in windows.
+2. use sudo apt-get install memcached to install memcached
 
-contentApi is 
+Clone this repo 
 
+### run npm install
+install all dependency
+
+### npm test
+run all test cases for 3 endpoints.
+
+### npm start
+start the server
+
+1. Basic Authentication is present. use 'suman' as username and 'mypass' for password
+
+## Explanation
+
+This app has 1 endpoint - /favorite
+which includes three method
+
+1. GET /favorite/userId
+
+   - provide mongodb ObjectId as String to replace userId
+
+3. PUT /favorite
+
+   - 3 required query parameters - userId, contentId & type
+   - userId - mongodb objectId of user
+   - contentId - Movies or TvShow objectId
+   - type - either 'Movie' or 'TvShow'
+
+5. DELETE /favorite
+   
+   - 2 reuired query parameters - userId, id
+   - id - item's id to be deleted
+   - userId - mongodb objectId of user
+ 
 
 ## Solution - Implementation
+
+### from content I mean Tvshow or Movie
 
 1. Made this service independent so if any other service go down it will not affect this service except Database.
 2. Single responsiblity - This service is only responsible for managing user's List.
 3. memcached is used to decrease server latency and minimize database hits. This will greatly enhance UX.
 4. Test cases are included.
+5. this service maintained it's own collection to resolve Many to Many relationship between content and User. The name of collection is 'favorites'
    
 ## Features
 
