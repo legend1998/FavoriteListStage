@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { getCache } from "../db/memcached";
 import { paginateData } from "../utils/functions";
+import basicAuth from "basic-auth";
 
 function checkCacheMyList(req: Request, res: Response, next: NextFunction) {
   const key: string = req.params.userId;
@@ -26,15 +27,25 @@ function checkCacheMyList(req: Request, res: Response, next: NextFunction) {
   });
 }
 
+const mUser = { username: "suman", pass: "mypass" };
+
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
-  if (!authHeader) {
+  const user = basicAuth(req);
+  if (!authHeader && !user) {
     return res.sendStatus(401);
   }
-
-  const [username, password] = authHeader.split(" ");
-  if (username !== "suman" || password !== "password") {
-    return res.sendStatus(401);
+  console.log(user?.name, user?.pass, "okay here is the basic auth");
+  if (user) {
+    if (!user || user.name !== mUser.username || user.pass !== mUser.pass) {
+      res.set("WWW-Authenticate", 'Basic realm="example"');
+      return res.status(401).send("Authentication required.");
+    }
+  } else if (authHeader) {
+    const [username, password] = authHeader.split(" ");
+    if (username !== mUser.username || password !== mUser.pass) {
+      return res.sendStatus(401);
+    }
   }
 
   // The user is authenticated
