@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DELETE /favorite  should return 200 for userid 666dbcd805052a0673aeddcb & itemId 666dbc47d973977242b614c8 1`] = `
+{
+  "deleted": Any<Number>,
+}
+`;
+
+exports[`DELETE /favorite  should return 400 if id query parameter is missing 1`] = `
+{
+  "error": Any<String>,
+}
+`;
+
+exports[`DELETE /favorite  should return 400 if userId query parameter is missing 1`] = `
+{
+  "error": Any<String>,
+}
+`;
+
+exports[`GET /favorite/asdf should return 400 if userId parameter is invalid 1`] = `
+{
+  "error": Any<String>,
+}
+`;
+
+exports[`PUT /favorite should return 200 with objectId add this item - Movie, id-  666dbc47d973977242b614c8 ,userId - 666dbcd805052a0673aeddcb 1`] = `
+{
+  "exists": Any<Boolean>,
+  "id": Any<String>,
+}
+`;
+
+exports[`PUT /favorite should return 400 if contentId query parameter is missing 1`] = `
+{
+  "error": Any<String>,
+}
+`;
+
+exports[`PUT /favorite should return 400 if type query parameter is missing 1`] = `
+{
+  "error": Any<String>,
+}
+`;
+
+exports[`PUT /favorite should return 400 if userId query parameter is missing 1`] = `
+{
+  "error": Any<String>,
+}
+`;
