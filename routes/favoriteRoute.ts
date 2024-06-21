@@ -28,6 +28,8 @@ router.get(
       setCache(userId, JSON.stringify(data));
 
       res.status(200).json(paginateData(pageNumber, data));
+      res.end();
+      return;
     } catch (e) {
       next(e);
     }

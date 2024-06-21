@@ -2,19 +2,20 @@ import request from "supertest";
 import mongoose from "mongoose";
 
 import app from "../index";
+import server from "../server";
 
 const userId = "666dbcd805052a0673aeddcb";
 const movieId = "666dbc47d973977242b614c8";
 const contentType = "Movie";
 
-beforeEach(async () => {
-  await mongoose.connect(
-    "mongodb+srv://suman:xFtw06WwOPMq8Ppd@cluster0.09rmyvy.mongodb.net/stage"
-  );
-});
+// beforeAll(async () => {
+//   await mongoose.connect(
+//     "mongodb+srv://suman:xFtw06WwOPMq8Ppd@cluster0.09rmyvy.mongodb.net/stage"
+//   );
+// });
 
-afterEach(async () => {
-  await mongoose.connection.close();
+afterAll((done) => {
+  server.close(done);
 });
 
 // unit testing

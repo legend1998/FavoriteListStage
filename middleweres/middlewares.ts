@@ -35,7 +35,6 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
   if (!authHeader && !user) {
     return res.sendStatus(401);
   }
-  console.log(user?.name, user?.pass, "okay here is the basic auth");
   if (user) {
     if (!user || user.name !== mUser.username || user.pass !== mUser.pass) {
       res.set("WWW-Authenticate", 'Basic realm="example"');
