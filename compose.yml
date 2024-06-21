@@ -1,0 +1,18 @@
+version: latest
+
+services:
+  app:
+    build: .
+    ports:
+      - "3001:80"
+    depends_on:
+      - memcached
+    environment:
+      - MEMCACHED_HOST=memcached
+      - MEMCACHED_PORT=11211
+      - PORT=80
+
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"

@@ -1,7 +1,11 @@
 // cache.js
 import memjs from "memjs";
 
-const MEMCACHED_URI = "127.0.0.1:11211"; // Default Memcached host and port
+const host = process.env.MEMCACHED_HOST || "127.0.0.1";
+const port = process.env.MEMCACHED_PORT || 11211;
+
+const MEMCACHED_URI = `${host}:${port}`; // Default Memcached host and port
+
 const mc = memjs.Client.create(MEMCACHED_URI);
 
 const getCache = (key: string, callback: Function) => {
